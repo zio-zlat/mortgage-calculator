@@ -1,0 +1,19 @@
+.formMortgage {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px 20px;
+    width: 500px;
+    margin-top: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.bigСolumn {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.smallRightColumn {
+    grid-column-start: 2;
+    grid-column-end: 3;
+}

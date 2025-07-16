@@ -1,0 +1,60 @@
+.heading {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.text-sm {
+    font-size: 14px;
+}
+
+.link-sm {
+    text-decoration: underline;
+    text-underline-offset: 1.5px;
+    cursor: pointer;
+}
+
+.label-sm {
+    font-size: 14px;
+}
+
+.button-text {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.highlight-primary {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.highlight-secondary {
+    font-size: 20px;
+}
+
+.text-error {
+    font-size: 12px;
+}
+
+.default {
+    color: #122F3F;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.subtle {
+    color: #9ABED5;
+}
+
+.muted {
+    color: #6B94A8;
+} 
+
+.accent {
+    color: #D7DA2F;
+}
+
+.error {
+    color: #D73328;
+}

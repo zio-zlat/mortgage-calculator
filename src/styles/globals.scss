@@ -1,0 +1,9 @@
+@use './fonts';
+@use './reset';
+
+body {
+  font-family: 'PlusJakartaSans', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+}

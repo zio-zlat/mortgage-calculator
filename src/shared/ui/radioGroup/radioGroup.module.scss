@@ -1,0 +1,22 @@
+.radioGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.radioButton {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: 1px solid #6B94A8;
+    border-radius: 6px;
+    background-color: transparent;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.selected {
+    border-color: #D7DA2F;
+    background-color: rgba(215, 218, 47, 0.25);
+}
