@@ -2,6 +2,10 @@
 
 Стек: HTML, CSS(SCSS), JavaScript, TypeScript, React, Vite
 
+Скриншоты исходников:
+- изначальный вид https://disk.yandex.ru/i/Kw8EoecgLniriA
+- после расчета калькулятора https://disk.yandex.ru/i/vF046lNKQDzq1A  
+
 Структура проекта:
 - src/ — исходные файлы проекта
 - src/shared/types — папка с переиспользуемыми типами
