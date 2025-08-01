@@ -1,14 +1,16 @@
+import clsx from "clsx";
+import type { TInputAffix, TInputTypes } from "../../types/formMortgage";
 import styles from "./TextInput.module.scss";
 import { useLayoutEffect, useRef } from "react";
-import type { InputAffix, InputTypes } from "../../types/textInput";
 
 type TextInputProps = {
-  type: InputTypes;
+  type: TInputTypes;
   name: string;
-  affix?: InputAffix;
+  affix?: TInputAffix;
+  error?: boolean;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "name">;
 
-export const TextInput = ({ type, name, affix, ...rest }: TextInputProps) => {
+export const TextInput = ({ type, name, affix, error, ...rest }: TextInputProps) => {
   const affixRef = useRef<HTMLSpanElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -16,27 +18,27 @@ export const TextInput = ({ type, name, affix, ...rest }: TextInputProps) => {
     if (affixRef.current && inputRef.current) {
       const widthAffix = affixRef.current.getBoundingClientRect().width;
       if (affix?.type === "prefix") {
-        inputRef.current.style.paddingLeft = `${widthAffix + 14}px`;
+        inputRef.current.style.paddingLeft = `${widthAffix + 20}px`;
       } else {
-        inputRef.current.style.paddingRight = `${widthAffix + 14}px`;
+        inputRef.current.style.paddingRight = `${widthAffix}px`;
       }
     }
   }, [affix]);
 
   return (
     <div className={styles.inputWrapper}>
-      {affix && (
-        <span aria-hidden="true" className={styles[affix.type]} ref={affixRef}>
-          {affix.content}
-        </span>
-      )}
       <input
-        className={styles.input}
+        className={clsx(styles.input, error && styles.input_error)}
         ref={inputRef}
         type={type}
         name={name}
         {...rest}
       />
+      {affix && (
+        <span aria-hidden="true" className={styles[affix.type]} ref={affixRef}>
+          {affix.content}
+        </span>
+      )}
     </div>
   );
 };

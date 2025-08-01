@@ -15,6 +15,7 @@ type TextTags =
   | "h5"
   | "h6";
 
+//Валидация тегов, которые указаны выше  
 type ValidTags = Extract<keyof HTMLElementTagNameMap, TextTags>;
 
 type TTypographyProps<T extends ValidTags> = {

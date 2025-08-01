@@ -1,8 +1,8 @@
-import { Demo } from "../demo/Demo"
+import { MortgagePage } from "../pages/MortgagePage"
 
 
 export const App = () => {
   return (
-    <Demo />
+    <MortgagePage />
   )
 }

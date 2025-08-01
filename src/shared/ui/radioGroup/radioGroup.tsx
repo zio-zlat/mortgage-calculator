@@ -2,20 +2,18 @@ import styles from "./RadioGroup.module.scss";
 import clsx from "clsx";
 import { RadioButton } from "../radioButton/radioButton";
 import { Typography } from "../typography/typography";
-
-type Option = {
-  label: string;
-  value: string;
-};
+import type React from "react";
+import type { TOptionRadio } from "../../types/formMortgage";
 
 type RadioGroupProps = {
-  title: string
+  title: string;
   name: string;
   value: string;
-  options: Option[];
+  options: TOptionRadio[];
   error?: string;
-  onClickRadio: (value: string) => void;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   className?: string;
+  classError?: string;
 };
 
 export const RadioGroup = ({
@@ -24,12 +22,13 @@ export const RadioGroup = ({
   value,
   options,
   error,
-  onClickRadio,
+  onChange,
   className,
+  classError
 }: RadioGroupProps) => {
   return (
     <div className={clsx(styles.radioGroup, className)}>
-      <Typography variant='label-sm' color='muted'>
+      <Typography variant="label-sm" color="muted" style={{marginBottom: '2px'}}>
         {title}
       </Typography>
       {options.map((option) => (
@@ -44,7 +43,7 @@ export const RadioGroup = ({
             name={name}
             value={option.value}
             checked={value === option.value}
-            onChange={() => onClickRadio(option.value)}
+            onChange={(e) => onChange(e)}
           />
           <Typography as="span" variant="button-text">
             {option.label}
@@ -52,7 +51,12 @@ export const RadioGroup = ({
         </label>
       ))}
       {error && (
-        <Typography as="span" variant="text-error" color="error">
+        <Typography
+          as="span"
+          variant="text-error"
+          color="error"
+          className={classError}
+        >
           {error}
         </Typography>
       )}

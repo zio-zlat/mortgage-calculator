@@ -2,8 +2,18 @@
 @use './reset';
 
 body {
+  display: flex;
+  align-items: center;
+  min-height: 100vh;
   font-family: 'PlusJakartaSans', sans-serif;
   font-weight: 500;
   font-size: 16px;
   line-height: 1;
+  background-color: #E3F3FD;
+}
+
+#root {
+  max-width: 1008px;
+  margin-left: auto;
+  margin-right: auto;
 }

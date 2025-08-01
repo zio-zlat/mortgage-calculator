@@ -1,19 +1,62 @@
-.formMortgage {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px 20px;
-    width: 500px;
-    margin-top: 200px;
-    margin-left: auto;
-    margin-right: auto;
+.form {
+    flex: 1;
+    padding: 43px 40px;
+
+    &_header {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &_inputList {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px 23px;
+        margin-top: 48px;
+        margin-bottom: 40px;
+
+        &_bigInput {
+            grid-column-start: 1;
+            grid-column-end: 3;
+        }
+    }
+
+    &_buttonReset:hover &_buttonReset_text, 
+    &_buttonReset:focus-visible &_buttonReset_text {
+        color: #122F3F;
+    }
+
+    &_buttonSubmit {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        font-family: inherit;
+        padding: 14px 37px;
+        background-color: #D7DA2F;
+        border: 1px solid #c6cd26;
+        border-radius: 9999px;
+        transition: border-color 0.3s ease, background-color 0.3s ease;
+
+        &:focus-visible {
+            border-color: #122F3F;
+        }
+
+        &:hover {
+            border-color: #D7DA2F;
+            background-color: rgba(215, 218, 47, 0.7);
+        }
+
+        &::before {
+            content: '';
+            background-image: url('src/assets/images/icon-calculator.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            width: 24px;
+            height: 24px;
+        }
+    }
 }
 
-.bigСolumn {
-    grid-column-start: 1;
-    grid-column-end: 3;
-}
-
-.smallRightColumn {
-    grid-column-start: 2;
-    grid-column-end: 3;
+.textError {
+    position: absolute;
+    bottom: -15px;
 }

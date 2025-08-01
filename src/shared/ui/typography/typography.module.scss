@@ -4,17 +4,23 @@
 }
 
 .text-sm {
-    font-size: 14px;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .link-sm {
+    font-size: 16px;
     text-decoration: underline;
     text-underline-offset: 1.5px;
     cursor: pointer;
+
+    &_:hover {
+        color: #122F3F;
+    }
 }
 
 .label-sm {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .button-text {
@@ -23,12 +29,12 @@
 }
 
 .highlight-primary {
-    font-size: 42px;
+    font-size: 56px;
     font-weight: 700;
 }
 
 .highlight-secondary {
-    font-size: 20px;
+    font-size: 24.5px;
 }
 
 .text-error {

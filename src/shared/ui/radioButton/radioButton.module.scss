@@ -19,8 +19,8 @@
 .visualRadio {
     display: inline-block;
     position: relative;
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
     border: 1px solid #6B94A8;
     border-radius: 50%;
     background-color: transparent;
@@ -32,8 +32,8 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        height: 12px;
-        width: 12px;
+        height: 10px;
+        width: 10px;
         background-color: transparent;
         border-radius: 50%;
         transition: background-color 0.3s ease;

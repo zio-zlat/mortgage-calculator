@@ -1,10 +1,12 @@
 .inputWrapper {
     position: relative;
     font-weight: 700;
+    z-index: 0;
+    font-size: 18px;
 }
 
 .input {
-    padding: 10px 14px;
+    padding: 13px 17px;
     width: 100%;
     border: 1px solid #6B94A8;
     border-radius: 6px;
@@ -13,11 +15,27 @@
     transition: border-color 0.3s ease;
 
     &:hover {
-        border-color: #9ABED5;
+        border-color: #122F3F;
     }
 
-    &:focus {
+    &:focus-visible {
         border-color: #D7DA2F;
+
+        & ~ .prefix, 
+        & ~ .suffix {
+            color: #122F3F;
+            background-color: #D7DA2F;
+        }
+    }
+
+    &_error {
+        border-color: #D73328;
+
+        & ~ .prefix, 
+        & ~ .suffix {
+            color: #ffffff;
+            background-color: #D73328;
+        }
     }
 }
 
@@ -27,8 +45,10 @@
     align-items: center;
     padding: 0 15px;
     height: 100%;
+    top: 0;
     color: #6B94A8;
     background-color: #E3F3FD;
+    transition: color 0.3s ease, background-color 0.3s ease;
     z-index: -1;
     pointer-events: none;
     user-select: none;
