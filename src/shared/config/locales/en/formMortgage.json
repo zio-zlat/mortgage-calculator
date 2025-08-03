@@ -1,0 +1,22 @@
+{
+  "header": {
+    "heading": "Mortgage Calculator"
+  },
+  "input": {
+    "mortgageAmount": "Mortgage Amount",
+    "mortgageTerm": "Mortgage Term",
+    "interestRate": "Mortgage Rate",
+    "mortgageType": "Mortgage Type",
+    "affixAmount": "£",
+    "affixTerm": "years",
+    "error": "This field is required"
+  },
+  "radio": {
+    "repayment": "Repayment",
+    "interestOnly": "Interest Only"
+  },
+  "button": {
+    "submit": "Calculate Repayments",
+    "reset": "Clear All"
+  } 
+}

@@ -1,0 +1,13 @@
+{
+  "preview": {
+    "heading": "Results shown here",
+    "description": "Complete the form and click “calculate repayments” to see what your monthly repayments would be."
+  },
+  "content": {
+    "heading": "Your results",
+    "description": "Your results are shown below based on the information you provided. To adjust the results, edit the form and click “calculate repayments” again.",
+    "repayments": "Your monthly repayments",
+    "total": "Total you'll repay over the term",
+    "currency": "£"
+  }
+}

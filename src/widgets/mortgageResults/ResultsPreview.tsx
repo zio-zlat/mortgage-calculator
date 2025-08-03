@@ -1,6 +1,9 @@
+import { useTranslation } from "react-i18next";
 import { Typography } from "../../shared/ui/typography/typography";
 
 export const ResultsPreview = () => {
+  const { t } = useTranslation("results");
+
   return (
     <>
       <img
@@ -9,12 +12,9 @@ export const ResultsPreview = () => {
         aria-hidden="true"
       />
       <Typography as="h2" variant="heading" color="white">
-        Results shown here
+        {t("preview.heading")}
       </Typography>
-      <Typography color="subtle">
-        Complete the form and click “calculate repayments” to see what your
-        monthly repayments would be.
-      </Typography>
+      <Typography color="subtle">{t("preview.description")}</Typography>
     </>
   );
 };

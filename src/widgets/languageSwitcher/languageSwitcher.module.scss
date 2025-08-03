@@ -1,0 +1,17 @@
+.languageSwitcher {
+    display: flex;
+    gap: 8px;
+    position: absolute;
+    top: 25px;
+    right: 40px;
+
+    &_button:hover &_button_text,
+    &_button:focus-visible &_button_text {
+        color: #D7DA2F;
+    }
+
+    &_button:disabled &_button_text {
+        cursor: default;
+        color: #6B94A8;
+    }
+}

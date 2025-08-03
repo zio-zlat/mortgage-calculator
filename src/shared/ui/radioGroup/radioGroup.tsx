@@ -4,6 +4,7 @@ import { RadioButton } from "../radioButton/radioButton";
 import { Typography } from "../typography/typography";
 import type React from "react";
 import type { TOptionRadio } from "../../types/formMortgage";
+import { useTranslation } from "react-i18next";
 
 type RadioGroupProps = {
   title: string;
@@ -26,6 +27,8 @@ export const RadioGroup = ({
   className,
   classError
 }: RadioGroupProps) => {
+  const { t } = useTranslation("form");
+
   return (
     <div className={clsx(styles.radioGroup, className)}>
       <Typography variant="label-sm" color="muted" style={{marginBottom: '2px'}}>
@@ -46,7 +49,7 @@ export const RadioGroup = ({
             onChange={(e) => onChange(e)}
           />
           <Typography as="span" variant="button-text">
-            {option.label}
+            {t(option.label)}
           </Typography>
         </label>
       ))}

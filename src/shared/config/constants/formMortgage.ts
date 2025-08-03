@@ -14,27 +14,27 @@ export const DEFAULT_FORM_VALUE: TFormValue = {
   type: "",
 };
 
-export const RADIO_OPTIONS: TOptionRadio[] = [
-  { label: "Repayment", value: "repayment" },
-  { label: "Interest Only", value: "interest" },
-];
-
 export const INPUT_CONFIGS: TTextInputField[] = [
   {
     name: "amount",
-    label: "Mortgage Amount",
-    affix: { type: "prefix", content: "£" },
+    label: "input.mortgageAmount",
+    affix: { type: "prefix", content: "input.affixAmount" },
   },
   {
     name: "term",
-    label: "Mortgage Term",
-    affix: { type: "suffix", content: "years" },
+    label: "input.mortgageTerm",
+    affix: { type: "suffix", content: "input.affixTerm" },
   },
   {
     name: "rate",
-    label: "Interest Rate",
+    label: "input.interestRate",
     affix: { type: "suffix", content: "%" },
   },
+];
+
+export const RADIO_OPTIONS: TOptionRadio[] = [
+  { label: "radio.repayment", value: "repayment" },
+  { label: "radio.interestOnly", value: "interest" },
 ];
 
 export const numberAllowedInInput: Record<
@@ -52,7 +52,7 @@ export const validationFormFields = (values: TFormValue) => {
 
   Object.entries(values).forEach(([key, value]) => {
     if (!value) {
-      errors[key as keyof TFormErrors] = "This field is required";
+      errors[key as keyof TFormErrors] = "input.error";
     }
   });
 

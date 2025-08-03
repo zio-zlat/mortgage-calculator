@@ -1,28 +1,39 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FormMortgage } from "../features/formMortgage/formMortgage";
 import type { TFormErrors, TFormValue } from "../shared/types/formMortgage";
 import {
   calculateMortgage,
   DEFAULT_FORM_VALUE,
-  INPUT_CONFIGS,
-  RADIO_OPTIONS,
   validationFormFields,
 } from "../shared/config/constants/formMortgage";
 import { shallowEqual } from "../shared/config/utils/utils";
 import { MortgageResults } from "../widgets/mortgageResults/MortgageResults";
 import styles from "./mortgagePage.module.scss";
 import type { TResults } from "../shared/types/mortgagePage";
-import { type TLang, type TLocales, LOCALE_MAP } from "../shared/config/constants/locales";
+import type { TLang, TLocales } from "../shared/config/constants/locales";
+import { LanguageSwitcher } from "../widgets/languageSwitcher/LanguageSwitcher";
 
-export const MortgagePage = () => {
+type MortgagePageProps = {
+  locales: TLocales;
+  possibleLanguages: TLang[];
+  currentLang: TLang;
+  changeLanguage: (lang: TLang) => void;
+};
+
+export const MortgagePage = ({
+  locales,
+  possibleLanguages,
+  currentLang,
+  changeLanguage,
+}: MortgagePageProps) => {
   const [formValue, setFormValue] = useState<TFormValue>(DEFAULT_FORM_VALUE);
+
   const [results, setResults] = useState<TResults>({
     monthlyRepayments: null,
     total: null,
   });
+
   const [formErrors, setFormErrors] = useState<TFormErrors>({});
-  const lang: TLang = 'ru'
-  const locales: TLocales = LOCALE_MAP[lang];
 
   const changeFormValue = useCallback(
     (name: keyof TFormValue, value: string | number | null) => {
@@ -57,6 +68,7 @@ export const MortgagePage = () => {
         if (!sameErrors) {
           setFormErrors(validationErrors);
         }
+        setResults({ monthlyRepayments: null, total: null });
         return;
       } else {
         if (Object.keys(formErrors).length > 0) {
@@ -86,10 +98,13 @@ export const MortgagePage = () => {
 
   return (
     <div className={styles.calculatorContent}>
+      <LanguageSwitcher
+        languages={possibleLanguages}
+        onClick={changeLanguage}
+        currentLang={currentLang}
+      />
       <FormMortgage
         formValue={formValue}
-        inputConfigs={INPUT_CONFIGS}
-        radioOptions={RADIO_OPTIONS}
         changeValue={changeFormValue}
         handleSubmit={handleSubmit}
         resetValue={resetFormValue}

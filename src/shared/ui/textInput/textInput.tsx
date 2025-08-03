@@ -2,6 +2,7 @@ import clsx from "clsx";
 import type { TInputAffix, TInputTypes } from "../../types/formMortgage";
 import styles from "./TextInput.module.scss";
 import { useLayoutEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 type TextInputProps = {
   type: TInputTypes;
@@ -10,9 +11,17 @@ type TextInputProps = {
   error?: boolean;
 } & Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "name">;
 
-export const TextInput = ({ type, name, affix, error, ...rest }: TextInputProps) => {
+export const TextInput = ({
+  type,
+  name,
+  affix,
+  error,
+  ...rest
+}: TextInputProps) => {
   const affixRef = useRef<HTMLSpanElement | null>(null);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+  const { t } = useTranslation();
 
   useLayoutEffect(() => {
     if (affixRef.current && inputRef.current) {
@@ -36,7 +45,7 @@ export const TextInput = ({ type, name, affix, error, ...rest }: TextInputProps)
       />
       {affix && (
         <span aria-hidden="true" className={styles[affix.type]} ref={affixRef}>
-          {affix.content}
+          {t(affix.content)}
         </span>
       )}
     </div>

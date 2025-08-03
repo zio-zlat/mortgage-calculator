@@ -1,0 +1,22 @@
+{
+  "header": {
+    "heading": "Ипотечный калькулятор"
+  },
+  "input": {
+    "mortgageAmount": "Сумма ипотеки",
+    "mortgageTerm": "Срок ипотеки",
+    "interestRate": "Процентная ставка",
+    "mortgageType": "Тип ипотеки",
+    "affixAmount": "₽",
+    "affixTerm": "лет",
+    "error": "Это поле обязательно"
+  },
+  "radio": {
+    "repayment": "Аннуитетный",
+    "interestOnly": "Только проценты"
+  },
+  "button": {
+    "submit": "Рассчитать платеж",
+    "reset": "Очистить всё"
+  }
+}

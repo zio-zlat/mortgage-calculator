@@ -54,6 +54,11 @@
             height: 24px;
         }
     }
+
+    &_footer {
+        display: flex;
+        justify-content: space-between;
+    }
 }
 
 .textError {

@@ -5,21 +5,22 @@ import styles from "./formMortgage.module.scss";
 import { Typography } from "../../shared/ui/typography/typography";
 import type {
   TFormValue,
-  TTextInputField,
-  TOptionRadio,
   TInputConfigsName,
   TFormErrors,
 } from "../../shared/types/formMortgage";
 import { memo, useMemo } from "react";
 import { NumericFormat } from "react-number-format";
 import { getSeparators } from "../../shared/config/utils/utils";
-import type { TLocales } from "../../shared/config/constants/locales";
-import { numberAllowedInInput } from "../../shared/config/constants/formMortgage";
+import type { TLang, TLocales } from "../../shared/config/constants/locales";
+import {
+  INPUT_CONFIGS,
+  numberAllowedInInput,
+  RADIO_OPTIONS,
+} from "../../shared/config/constants/formMortgage";
+import { useTranslation } from "react-i18next";
 
 type FormMortgageProps = {
   formValue: TFormValue;
-  inputConfigs: TTextInputField[];
-  radioOptions: TOptionRadio[];
   changeValue: (name: keyof TFormValue, value: string | number | null) => void;
   handleSubmit?: (e: React.FormEvent<HTMLFormElement>) => void;
   resetValue?: () => void;
@@ -35,8 +36,6 @@ const TextInputClassName: Partial<Record<keyof TInputConfigsName, string>> = {
 export const FormMortgage = memo(
   ({
     formValue,
-    inputConfigs,
-    radioOptions,
     changeValue,
     handleSubmit,
     resetValue,
@@ -44,6 +43,8 @@ export const FormMortgage = memo(
     locales,
   }: FormMortgageProps) => {
     const separators = useMemo(() => getSeparators(locales), [locales]);
+
+    const { t } = useTranslation("form");
 
     //Проверка определенных полей (сейчас только rate), можно ли вводить 0 или 0 с разделителем(в зависимости от локали)
     const canEnterZero = (
@@ -80,25 +81,11 @@ export const FormMortgage = memo(
       <form className={styles.form} onSubmit={handleSubmit} autoComplete="off">
         <div className={styles.form_header}>
           <Typography as="h1" variant="heading">
-            Mortgage Calculator
+            {t("header.heading")}
           </Typography>
-          <button
-            type="reset"
-            onClick={resetValue}
-            className={styles.form_buttonReset}
-          >
-            <Typography
-              as="span"
-              variant="link-sm"
-              color="muted"
-              className={styles.form_buttonReset_text}
-            >
-              Clear All
-            </Typography>
-          </button>
         </div>
         <div className={styles.form_inputList}>
-          {inputConfigs.map(({ name, label, affix }) => (
+          {INPUT_CONFIGS.map(({ name, label, affix }) => (
             <NumericFormat
               key={name}
               customInput={TextInputField}
@@ -113,11 +100,11 @@ export const FormMortgage = memo(
               type="text"
               name={name}
               value={formValue[name]}
-              label={label}
+              label={t(label)}
               labelVariant="label-sm"
               labelColor="muted"
               affix={affix}
-              error={errors[name]}
+              error={errors[name] ? t(errors[name]) : undefined}
               classError={styles.textError}
               onValueChange={({ floatValue }) => {
                 changeValue(name, floatValue ?? "");
@@ -127,21 +114,37 @@ export const FormMortgage = memo(
             />
           ))}
           <RadioGroup
-            title="Mortgage Type"
+            title={t("input.mortgageType")}
             name="type"
             value={formValue.type}
-            options={radioOptions}
+            options={RADIO_OPTIONS}
             onChange={(e) => changeValue("type", e.target.value)}
             className={styles.form_inputList_bigInput}
-            error={errors.type}
+            error={errors.type ? t(errors.type) : undefined}
             classError={styles.textError}
           />
         </div>
-        <button type="submit" className={styles.form_buttonSubmit}>
-          <Typography as="span" variant="button-text">
-            Calculate Repayments
-          </Typography>
-        </button>
+        <div className={styles.form_footer}>
+          <button type="submit" className={styles.form_buttonSubmit}>
+            <Typography as="span" variant="button-text">
+              {t("button.submit")}
+            </Typography>
+          </button>
+          <button
+            type="reset"
+            onClick={resetValue}
+            className={styles.form_buttonReset}
+          >
+            <Typography
+              as="span"
+              variant="link-sm"
+              color="muted"
+              className={styles.form_buttonReset_text}
+            >
+              {t("button.reset")}
+            </Typography>
+          </button>
+        </div>
       </form>
     );
   }
