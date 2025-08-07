@@ -1,0 +1,66 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins';
+
+.numberInputField {
+    @include mixins.flex-basic(column, flex-end, null, 11px);
+    position: relative;
+}
+
+.inputWrapper {
+    position: relative;
+    z-index: 0;
+    @include mixins.font(18px, $weight-bold);
+}
+
+.input {
+    padding: 13px 17px;
+    width: 100%;
+    border: 1px solid $muted-color;
+    border-radius: 6px;
+    background-color: transparent;
+    color: $default-color;
+    @include mixins.transition-multiple((border-color));
+
+    &:hover {
+        border-color: $default-color;
+    }
+
+    &:focus-visible {
+        @include mixins.input-toggle($accent-color, $default-color);
+    }
+
+    &_error {
+        @include mixins.input-toggle($error-color, $white-color);
+    }
+}
+
+.prefix, .suffix {
+    position: absolute;
+    @include mixins.flex-basic(null, null, center, null);
+    padding: 0 15px;
+    height: 100%;
+    top: 0;
+    color: $muted-color;
+    background-color: $background-color;
+    @include mixins.transition-multiple((color, background-color));
+    z-index: -1;
+    pointer-events: none;
+    user-select: none;
+}
+
+.prefix {
+    border-bottom-left-radius: 6px;
+    border-top-left-radius: 6px;
+}
+
+.suffix {
+    right: 0;
+    border-bottom-right-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.textError {
+    position: absolute;
+    bottom: -3px;
+    transform: translateY(100%);
+}

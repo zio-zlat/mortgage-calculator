@@ -1,68 +1,70 @@
 import styles from "./RadioGroup.module.scss";
 import clsx from "clsx";
-import { RadioButton } from "../radioButton/radioButton";
-import { Typography } from "../typography/typography";
-import type React from "react";
-import type { TOptionRadio } from "../../types/formMortgage";
+import { Typography } from "../typography/Typography";
+import type { TFormValue, TOptionRadio } from "../../types/formMortgage";
 import { useTranslation } from "react-i18next";
+import { RadioInput } from "../radioInput/RadioInput";
+import { memo } from "react";
 
 type RadioGroupProps = {
   title: string;
-  name: string;
+  name: keyof TFormValue;
   value: string;
   options: TOptionRadio[];
   error?: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (name: keyof TFormValue, value: string) => void;
   className?: string;
-  classError?: string;
 };
 
-export const RadioGroup = ({
-  title,
-  name,
-  value,
-  options,
-  error,
-  onChange,
-  className,
-  classError
-}: RadioGroupProps) => {
-  const { t } = useTranslation("form");
+export const RadioGroup = memo(
+  ({
+    title,
+    name,
+    value,
+    options,
+    error,
+    onChange,
+    className,
+  }: RadioGroupProps) => {
+    const { t } = useTranslation("form");
 
-  return (
-    <div className={clsx(styles.radioGroup, className)}>
-      <Typography variant="label-sm" color="muted" style={{marginBottom: '2px'}}>
-        {title}
-      </Typography>
-      {options.map((option) => (
-        <label
-          key={option.value}
-          className={clsx(
-            styles.radioButton,
-            value === option.value ? styles.selected : ""
-          )}
-        >
-          <RadioButton
-            name={name}
-            value={option.value}
-            checked={value === option.value}
-            onChange={(e) => onChange(e)}
-          />
-          <Typography as="span" variant="button-text">
-            {t(option.label)}
-          </Typography>
-        </label>
-      ))}
-      {error && (
-        <Typography
-          as="span"
-          variant="text-error"
-          color="error"
-          className={classError}
-        >
-          {error}
+    return (
+      <fieldset className={clsx(styles.radioGroup, className)}>
+        <Typography as="legend" color="muted" className={styles.legend}>
+          {title}
         </Typography>
-      )}
-    </div>
-  );
-};
+        {options.map((option) => (
+          <label
+            key={option.value}
+            className={clsx(
+              styles.radio,
+              value === option.value ? styles.selected : ""
+            )}
+          >
+            <RadioInput
+              name={name}
+              value={option.value}
+              checked={value === option.value}
+              onChange={(e) => onChange(name, e.target.value)}
+              inputClassName={styles.radio_input}
+              indicatorClassName={styles.radio_visual}
+            />
+            <Typography as="span" variant="button-text">
+              {t(option.label)}
+            </Typography>
+          </label>
+        ))}
+        {error && (
+          <Typography
+            as="span"
+            variant="text-error"
+            color="error"
+            className={styles.textError}
+          >
+            {error}
+          </Typography>
+        )}
+      </fieldset>
+    );
+  }
+);

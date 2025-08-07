@@ -1,5 +1,3 @@
-import type { TLocales } from "../constants/locales";
-
 //Поверхностное сравнение двух объектов по ключам
 export const shallowEqual = <T extends object>(obj1: T, obj2: T): boolean => {
   const keys1 = Object.keys(obj1);
@@ -13,10 +11,26 @@ export const shallowEqual = <T extends object>(obj1: T, obj2: T): boolean => {
   });
 };
 
+//Валидация полей формы
+export const validationFormFields = <T extends Record<string, unknown>>(
+  values: T,
+  getError: (key: keyof T) => string
+) => {
+  const errors: Partial<Record<keyof T, string>> = {};
+
+  Object.entries(values).forEach(([key, value]) => {
+    if (!value) {
+      errors[key as keyof typeof errors] = getError(key);
+    }
+  });
+
+  return errors;
+};
+
 //Форматирование чисел
 export const numberFormat = (
   value: number | null | undefined,
-  locales: TLocales
+  locales: string
 ) => {
   if (value === null || value === undefined) return "";
 
@@ -28,7 +42,9 @@ export const numberFormat = (
 };
 
 //Получение разрядного и десятичного разделителя в выбранной локале
-export const getSeparators = (locales: TLocales) => {
+export const getSeparators = (local: string) => {
+  const locales = `${local.toLowerCase()}-${local.toUpperCase()}`;
+
   const separators = numberFormat(1000.5, locales).replace(/\d/g, "").split("");
 
   const thousandSeparator = separators[0];

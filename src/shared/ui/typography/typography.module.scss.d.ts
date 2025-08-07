@@ -3,7 +3,6 @@ declare const styles: {
   heading: string;
   "text-sm": string;
   "link-sm": string;
-  "label-sm": string;
   "button-text": string;
   "highlight-primary": string;
   "highlight-secondary": string;

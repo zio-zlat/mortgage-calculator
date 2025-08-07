@@ -5,18 +5,17 @@ import { ResultsPreview } from "./ResultsPreview";
 import { ResultsContent } from "./ResultsContent";
 import { numberFormat } from "../../shared/config/utils/utils";
 import { memo } from "react";
-import type { TLocales } from "../../shared/config/constants/locales";
+import i18n from "../../app/i18n";
 
 type MortgageResultsProps = {
   results: TResults;
-  locales: TLocales
 };
 
-export const MortgageResults = memo(({ results, locales }: MortgageResultsProps) => {
+export const MortgageResults = memo(({ results }: MortgageResultsProps) => {
   const resultsHasNull = Object.values(results).some((value) => value === null);
 
-  const repayments = numberFormat(results.monthlyRepayments, locales);
-  const total = numberFormat(results.total, locales);
+  const repayments = numberFormat(results.monthlyRepayments, i18n.language);
+  const total = numberFormat(results.total, i18n.language);
 
   return (
     <div

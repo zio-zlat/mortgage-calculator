@@ -1,66 +1,59 @@
+@use '../../../styles/variables' as *;
+@use '../../../styles/mixins';
+
 .heading {
-    font-weight: 700;
-    font-size: 24px;
+    @include mixins.font(24px, $weight-bold);
 }
 
 .text-sm {
-    font-size: 16px;
-    line-height: 1.5;
+    @include mixins.font(16px, null, 1.5);
 }
 
 .link-sm {
-    font-size: 16px;
     text-decoration: underline;
     text-underline-offset: 1.5px;
-    cursor: pointer;
 
     &_:hover {
-        color: #122F3F;
+        color: $default-color;
     }
 }
 
-.label-sm {
-    font-size: 16px;
-}
-
 .button-text {
-    font-size: 18px;
-    font-weight: 700;
+    @include mixins.font(18px, $weight-bold);
 }
 
 .highlight-primary {
-    font-size: 56px;
-    font-weight: 700;
+    @include mixins.font(56px, $weight-bold);
 }
 
 .highlight-secondary {
-    font-size: 24.5px;
+    @include mixins.font(24.5px);
 }
 
 .text-error {
-    font-size: 12px;
+    @include mixins.font(12px);
 }
 
 .default {
-    color: #122F3F;
+    color: $default-color;
 }
 
 .white {
-    color: #ffffff;
+    color: $white-color;
 }
 
 .subtle {
-    color: #9ABED5;
+    color: $subtle-color;
 }
 
 .muted {
-    color: #6B94A8;
+    color: $muted-color;
 } 
 
 .accent {
-    color: #D7DA2F;
+    color: $accent-color;
 }
 
 .error {
-    color: #D73328;
+    color: $error-color;
 }

@@ -1,15 +1,14 @@
-@use './fonts';
-@use './reset';
+@use './_fonts';
+@use './_reset';
+@use './variables' as *;
+@use './mixins';
 
 body {
-  display: flex;
-  align-items: center;
+  @include mixins.flex-basic(null, null, center, null);
   min-height: 100vh;
   font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1;
-  background-color: #E3F3FD;
+  background-color: $background-color;
+  @include mixins.font(16px);
 }
 
 #root {

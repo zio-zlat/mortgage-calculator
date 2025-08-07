@@ -8,12 +8,17 @@
     "interestRate": "Mortgage Rate",
     "mortgageType": "Mortgage Type",
     "affixAmount": "£",
-    "affixTerm": "years",
-    "error": "This field is required"
+    "affixTerm": "years"
   },
   "radio": {
     "repayment": "Repayment",
     "interestOnly": "Interest Only"
+  },
+  "error": {
+    "amount": "Please enter the loan amount.",
+    "term": "Please enter the loan term.",
+    "rate": "Please enter the interest rate.",
+    "type": "Please select the mortgage type."
   },
   "button": {
     "submit": "Calculate Repayments",

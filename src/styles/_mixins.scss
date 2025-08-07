@@ -1,0 +1,45 @@
+@use "sass:list";
+
+@mixin font($size, $weight: 400, $height: 1) {
+  font-size: $size;
+  font-weight: $weight;
+  line-height: $height;
+}
+
+@mixin flex-basic($flex-direction: null, $justify-content: null, $align-items: null, $gap: null) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  gap: $gap
+}
+
+@mixin transition-multiple($properties, $duration: 0.3s, $timing: ease) {
+  $transitions: ();
+
+  @each $prop in $properties {
+    $transitions: list.append($transitions, #{$prop} #{$duration} #{$timing}, comma);
+  }
+
+  transition: $transitions;
+}
+
+@mixin box-shadow-multiple($insets, $offset-x, $offset-y, $blur-radius, $color) {
+  $box-shadows: ();
+
+  @each $inset in $insets {
+    $box-shadows: list.append($box-shadows, #{$inset} #{$offset-x} #{$offset-y} #{$blur-radius} #{$color}, comma); 
+  }
+
+  box-shadow: $box-shadows;
+}
+
+@mixin input-toggle($border-color, $affix-color) {
+  border-color: $border-color;
+
+  & ~ .prefix, 
+  & ~ .suffix {
+      color: $affix-color;
+      background-color: $border-color;
+  }
+}

@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Typography } from "../../shared/ui/typography/typography";
+import { Typography } from "../../shared/ui/typography/Typography";
 import styles from "./mortgageResults.module.scss";
 
 type ResultsContentProps = {

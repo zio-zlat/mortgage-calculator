@@ -11,15 +11,17 @@ h3,
 h4,
 h5,
 h6,
-p {
+p,
+button,
+input,
+fieldset,
+legend {
   margin: 0;
   padding: 0;
 }
 
 button,
 input {
-  margin: 0;
-  padding: 0;
   font: inherit;
   border: none;
   background: transparent;
@@ -32,4 +34,8 @@ button {
 
 input {
   color: inherit;
+}
+
+fieldset{
+  border: none;
 }

@@ -1,17 +1,20 @@
+@use '../../styles/variables' as *;
+
 .form {
     flex: 1;
-    padding: 43px 40px;
+    padding: $padding-section;
 
     &_header {
         display: flex;
         justify-content: space-between;
+        align-items: center;
     }
 
     &_inputList {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 28px 23px;
-        margin-top: 48px;
+        gap: 24px 23px;
+        margin-top: 42px;
         margin-bottom: 40px;
 
         &_bigInput {
@@ -22,31 +25,37 @@
 
     &_buttonReset:hover &_buttonReset_text, 
     &_buttonReset:focus-visible &_buttonReset_text {
-        color: #122F3F;
+        color: $default-color;
     }
 
     &_buttonSubmit {
         display: flex;
         align-items: center;
-        gap: 15px;
+        position: relative;
         font-family: inherit;
-        padding: 14px 37px;
-        background-color: #D7DA2F;
+        padding: 17px 37px;
+        background-color: $accent-color;
         border: 1px solid #c6cd26;
         border-radius: 9999px;
         transition: border-color 0.3s ease, background-color 0.3s ease;
 
+        &_text {
+            margin-left: 38px;
+        }
+
         &:focus-visible {
-            border-color: #122F3F;
+            border-color: $default-color;
         }
 
         &:hover {
-            border-color: #D7DA2F;
-            background-color: rgba(215, 218, 47, 0.7);
+            border-color: $accent-color;
+            background-color: rgba($accent-color, 0.7);
         }
 
         &::before {
             content: '';
+            position: absolute;
+            left: 40px;
             background-image: url('src/assets/images/icon-calculator.svg');
             background-size: contain;
             background-repeat: no-repeat;
@@ -54,14 +63,4 @@
             height: 24px;
         }
     }
-
-    &_footer {
-        display: flex;
-        justify-content: space-between;
-    }
-}
-
-.textError {
-    position: absolute;
-    bottom: -15px;
 }

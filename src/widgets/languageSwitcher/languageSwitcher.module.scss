@@ -1,3 +1,5 @@
+@use '../../styles/variables' as *;
+
 .languageSwitcher {
     display: flex;
     gap: 8px;
@@ -7,11 +9,11 @@
 
     &_button:hover &_button_text,
     &_button:focus-visible &_button_text {
-        color: #D7DA2F;
+        color: $accent-color
     }
 
     &_button:disabled &_button_text {
         cursor: default;
-        color: #6B94A8;
+        color: $muted-color
     }
 }

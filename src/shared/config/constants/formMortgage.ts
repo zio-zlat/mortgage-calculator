@@ -1,10 +1,10 @@
 import type {
-  minMaxAllowed,
   TFormErrors,
   TFormValue,
-  TInputConfigsName,
   TOptionRadio,
   TTextInputField,
+  TNumberAllowedInInput,
+  TInputNumber,
 } from "../../types/formMortgage";
 
 export const DEFAULT_FORM_VALUE: TFormValue = {
@@ -37,27 +37,13 @@ export const RADIO_OPTIONS: TOptionRadio[] = [
   { label: "radio.interestOnly", value: "interest" },
 ];
 
-export const numberAllowedInInput: Record<
-  keyof TInputConfigsName,
-  minMaxAllowed
-> = {
+export const NUMBER_ALLOWED_IN_INPUT: TNumberAllowedInInput = {
   amount: { minLimit: 1, maxLimit: 50000000 },
   term: { minLimit: 1, maxLimit: 35 },
   rate: { minLimit: 0.1, maxLimit: 50 },
 };
 
-//Валидация полей формы
-export const validationFormFields = (values: TFormValue) => {
-  const errors: TFormErrors = {};
-
-  Object.entries(values).forEach(([key, value]) => {
-    if (!value) {
-      errors[key as keyof TFormErrors] = "input.error";
-    }
-  });
-
-  return errors;
-};
+export const ZERO_ALLOWED_IN_INPUT: (keyof TInputNumber)[] = ["rate"];
 
 //Формула расчета ипотеки
 export const calculateMortgage = (

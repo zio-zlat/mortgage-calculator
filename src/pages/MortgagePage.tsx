@@ -1,99 +1,38 @@
-import React, { useCallback, useEffect, useState } from "react";
 import { FormMortgage } from "../features/formMortgage/formMortgage";
-import type { TFormErrors, TFormValue } from "../shared/types/formMortgage";
-import {
-  calculateMortgage,
-  DEFAULT_FORM_VALUE,
-  validationFormFields,
-} from "../shared/config/constants/formMortgage";
-import { shallowEqual } from "../shared/config/utils/utils";
+import { DEFAULT_FORM_VALUE } from "../shared/config/constants/formMortgage";
 import { MortgageResults } from "../widgets/mortgageResults/MortgageResults";
 import styles from "./mortgagePage.module.scss";
-import type { TResults } from "../shared/types/mortgagePage";
-import type { TLang, TLocales } from "../shared/config/constants/locales";
+import type { TLang } from "../shared/config/constants/locales";
 import { LanguageSwitcher } from "../widgets/languageSwitcher/LanguageSwitcher";
+import { useForm } from "../shared/hook/useForm";
+import { useMortgage } from "../shared/hook/useMortgage";
 
 type MortgagePageProps = {
-  locales: TLocales;
   possibleLanguages: TLang[];
-  currentLang: TLang;
   changeLanguage: (lang: TLang) => void;
 };
 
 export const MortgagePage = ({
-  locales,
   possibleLanguages,
-  currentLang,
   changeLanguage,
 }: MortgagePageProps) => {
-  const [formValue, setFormValue] = useState<TFormValue>(DEFAULT_FORM_VALUE);
+  const {
+    formValue,
+    formErrors,
+    setFormErrors,
+    changeFormValue,
+    resetFormValue,
+  } = useForm(DEFAULT_FORM_VALUE, {});
 
-  const [results, setResults] = useState<TResults>({
-    monthlyRepayments: null,
-    total: null,
-  });
-
-  const [formErrors, setFormErrors] = useState<TFormErrors>({});
-
-  const changeFormValue = useCallback(
-    (name: keyof TFormValue, value: string | number | null) => {
-      setFormValue((prev) => ({
-        ...prev,
-        [name]: value?.toString() ?? "",
-      }));
-
-      setFormErrors((prevErrors) => {
-        if (!prevErrors[name]) return prevErrors;
-
-        const newErrors = { ...prevErrors };
-        delete newErrors[name];
-        return newErrors;
-      });
+  const { results, handleSubmit } = useMortgage(
+    {
+      monthlyRepayments: null,
+      total: null,
     },
-    []
-  );
-
-  const resetFormValue = useCallback(() => {
-    setFormValue(DEFAULT_FORM_VALUE);
-  }, []);
-
-  const handleSubmit = useCallback(
-    (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-
-      const validationErrors = validationFormFields(formValue);
-      const sameErrors = shallowEqual(validationErrors, formErrors);
-
-      if (Object.keys(validationErrors).length > 0) {
-        if (!sameErrors) {
-          setFormErrors(validationErrors);
-        }
-        setResults({ monthlyRepayments: null, total: null });
-        return;
-      } else {
-        if (Object.keys(formErrors).length > 0) {
-          setFormErrors({});
-        }
-      }
-
-      const amount = Number(formValue.amount);
-      const termInMonths = Number(formValue.term) * 12;
-      const monthlyRate = Number(formValue.rate) / 1200;
-
-      const monthlyRepayments = calculateMortgage(
-        amount,
-        termInMonths,
-        monthlyRate,
-        formValue.type
-      );
-      const total = monthlyRepayments * termInMonths;
-
-      setResults({
-        monthlyRepayments: monthlyRepayments,
-        total: total,
-      });
-    },
-    [formValue, formErrors]
+    formValue,
+    formErrors,
+    (name) => `error.${name}`,
+    setFormErrors
   );
 
   return (
@@ -101,7 +40,6 @@ export const MortgagePage = ({
       <LanguageSwitcher
         languages={possibleLanguages}
         onClick={changeLanguage}
-        currentLang={currentLang}
       />
       <FormMortgage
         formValue={formValue}
@@ -109,9 +47,8 @@ export const MortgagePage = ({
         handleSubmit={handleSubmit}
         resetValue={resetFormValue}
         errors={formErrors}
-        locales={locales}
       />
-      <MortgageResults results={results} locales={locales} />
+      <MortgageResults results={results} />
     </div>
   );
 };

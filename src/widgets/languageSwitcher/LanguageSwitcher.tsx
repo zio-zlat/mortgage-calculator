@@ -1,19 +1,18 @@
+import i18n from "../../app/i18n";
 import {
   LANGUAGE_LABELS,
   type TLang,
 } from "../../shared/config/constants/locales";
-import { Typography } from "../../shared/ui/typography/typography";
+import { Typography } from "../../shared/ui/typography/Typography";
 import styles from "./languageSwitcher.module.scss";
 
 type LanguageSwitcherProps = {
   languages: TLang[];
-  currentLang: TLang;
   onClick: (lang: TLang) => void;
 };
 
 export const LanguageSwitcher = ({
   languages,
-  currentLang,
   onClick,
 }: LanguageSwitcherProps) => {
   return (
@@ -22,7 +21,7 @@ export const LanguageSwitcher = ({
         <button
           key={lang}
           type="button"
-          disabled={currentLang === lang}
+          disabled={i18n.language === lang}
           onClick={() => onClick(lang)}
           className={styles.languageSwitcher_button}
         >

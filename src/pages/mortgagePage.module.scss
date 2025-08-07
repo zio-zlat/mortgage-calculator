@@ -1,6 +1,8 @@
+@use '../styles/variables' as *;
+@use '../styles/mixins';
+
 .calculatorContent {
-    display: flex;
-    flex-direction: row;
-    background-color: #ffffff;
+    @include mixins.flex-basic;
+    background-color: $white-color;
     border-radius: 20px;
 }
